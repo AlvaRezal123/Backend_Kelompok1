@@ -37,4 +37,23 @@ class Magang extends Model
         // Format ID baru (contoh: MG2025001)
         return 'MG' . date('Y') . str_pad($newId, 3, '0', STR_PAD_LEFT);
     }
+
+    public function generatePDF()
+{
+    $magang = $this->vMagangModel->getMagangWithNames();
+
+    if (empty($magang)) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Data magang tidak ditemukan'
+        ])->setStatusCode(404);
+    }
+
+    // Debug cek data
+    echo '<pre>';
+    print_r($magang);
+    echo '</pre>';
+    exit;
+}
+
 }

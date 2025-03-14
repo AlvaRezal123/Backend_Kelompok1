@@ -16,9 +16,13 @@ $routes->get('mahasiswa', 'MahasiswaController::index');
 
 $routes->post('api/register', 'UserController::register');
 $routes->post('api/login', 'UserController::login');
-$routes->get('api/users', 'UserController::getAllUsers');  // Menampilkan semua user
-$routes->delete('api/users/(:num)', 'UserController::deleteUser/$1'); // Hapus user berdasarkan ID
-$routes->put('api/users/(:num)', 'UserController::updateUser/$1');
+$routes->get('api/user', 'UserController::getAllUsers');  // Menampilkan semua user
+$routes->delete('api/user/(:num)', 'UserController::deleteUser/$1'); // Hapus user berdasarkan ID
+$routes->put('api/user/(:num)', 'UserController::updateUser/$1');
+
+$routes->get('/generate-pdf', 'ViewController::generatePDF');
+$routes->get('/magang', 'ViewController::index');
+
 
 
 
