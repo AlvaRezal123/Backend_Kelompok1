@@ -110,8 +110,21 @@ public function delete($id)
         'message' => 'Data pembimbing berhasil dihapus'
     ])->setStatusCode(ResponseInterface::HTTP_OK);
 }
-
-
-
-    
+    public function show($id)
+    {
+        $pembimbingModel = new Pembimbing();
+        $pembimbing = $pembimbingModel->find($id);
+        
+        if (!$pembimbing) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Data pembimbing tidak ditemukan'
+            ])->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
+        }
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $pembimbing
+        ]);
+    }
 }

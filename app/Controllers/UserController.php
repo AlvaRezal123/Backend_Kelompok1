@@ -17,6 +17,12 @@ class UserController extends ResourceController
             return $this->respond(['status' => 'error', 'message' => 'Semua field harus diisi!'], 400);
         }
 
+        // Validasi role yang diizinkan
+        $allowedRoles = ['admin', 'mahasiswa', 'pembimbing'];
+        if (!in_array($json->role, $allowedRoles)) {
+            return $this->respond(['status' => 'error', 'message' => 'Role tidak valid!'], 400);
+        }
+
         // Cek apakah username sudah ada
         if ($userModel->getUserByUsername($json->username)) {
             return $this->respond(['status' => 'error', 'message' => 'Username sudah terdaftar!'], 400);
@@ -50,10 +56,18 @@ class UserController extends ResourceController
         if ($user) {
             // Verifikasi password
             if (password_verify($json->password, $user['password'])) {
+                // Generate token sederhana (dalam production gunakan JWT)
+                $token = bin2hex(random_bytes(32));
+                
                 return $this->respond([
                     'status' => 'success',
                     'message' => 'Login berhasil!',
-                    
+                    'data' => [
+                        'id_user' => $user['id_user'],
+                        'username' => $user['username'],
+                        'role' => $user['role'],
+                        'token' => $token
+                    ]
                 ]);
             } else {
                 return $this->respond(['status' => 'error', 'message' => 'Password salah!'], 401);
@@ -67,61 +81,61 @@ class UserController extends ResourceController
     public function getAllUsers()
     {
         $userModel = new UserModel();
-        $users = $userModel->findAll(); // Mengambil semua data user dari database
+        $users = $userModel->findAll();
     
-        return $this->respond($users); // Mengembalikan data langsung tanpa pembungkus "status"
-    }
-    
-
-// Menghapus user berdasarkan id_user
-public function deleteUser($id)
-{
-    $userModel = new UserModel();
-
-    // Cek apakah user dengan ID tersebut ada
-    $user = $userModel->find($id);
-    if (!$user) {
-        return $this->respond(['status' => 'error', 'message' => 'User tidak ditemukan!'], 404);
+        return $this->respond([
+            'status' => 'success',
+            'data' => $users
+        ]);
     }
 
-    // Hapus user dari database
-    $userModel->delete($id);
-    return $this->respond(['status' => 'success', 'message' => 'User berhasil dihapus!']);
-}
+    // Menghapus user berdasarkan id_user
+    public function deleteUser($id)
+    {
+        $userModel = new UserModel();
 
-public function updateUser($id_user)
-{
-    $userModel = new UserModel();
-    
-    // Ambil data dari request
-    $json = $this->request->getJSON();
-    
-    // Cek apakah user dengan ID tersebut ada
-    $user = $userModel->find($id_user);
-    if (!$user) {
-        return $this->respond(['status' => 'error', 'message' => 'User tidak ditemukan!'], 404);
+        // Cek apakah user dengan ID tersebut ada
+        $user = $userModel->find($id);
+        if (!$user) {
+            return $this->respond(['status' => 'error', 'message' => 'User tidak ditemukan!'], 404);
+        }
+
+        // Hapus user dari database
+        $userModel->delete($id);
+        return $this->respond(['status' => 'success', 'message' => 'User berhasil dihapus!']);
     }
 
-    // Data yang akan diperbarui
-    $data = [];
-    if (isset($json->username)) {
-        $data['username'] = $json->username;
+    public function updateUser($id_user)
+    {
+        $userModel = new UserModel();
+        
+        // Ambil data dari request
+        $json = $this->request->getJSON();
+        
+        // Cek apakah user dengan ID tersebut ada
+        $user = $userModel->find($id_user);
+        if (!$user) {
+            return $this->respond(['status' => 'error', 'message' => 'User tidak ditemukan!'], 404);
+        }
+
+        // Data yang akan diperbarui
+        $data = [];
+        if (isset($json->username)) {
+            $data['username'] = $json->username;
+        }
+        if (isset($json->role)) {
+            $data['role'] = $json->role;
+        }
+        if (isset($json->password)) {
+            $data['password'] = password_hash($json->password, PASSWORD_DEFAULT);
+        }
+
+        // Update data
+        $userModel->update($id_user, $data);
+
+        return $this->respond([
+            'status' => 'success',
+            'message' => 'User berhasil diperbarui!',
+        ]);
     }
-    if (isset($json->role)) {
-        $data['role'] = $json->role;
-    }
-    if (isset($json->password)) {
-        $data['password'] = password_hash($json->password, PASSWORD_DEFAULT); // Enkripsi password baru
-    }
-
-    // Update data
-    $userModel->update($id_user, $data);
-
-    return $this->respond([
-        'status' => 'success',
-        'message' => 'User berhasil diperbarui!',
-    ]);
-}
-
-
 }

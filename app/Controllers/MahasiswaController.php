@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controllers;
-
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Mahasiswa;
 
@@ -10,31 +8,25 @@ class MahasiswaController extends BaseController
     public function index()
 {
     $mahasiswaModel = new Mahasiswa();
-
     // Ambil semua data mahasiswa dari tabel
     $mahasiswa = $mahasiswaModel->findAll();
-
     if (empty($mahasiswa)) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'Data mahasiswa tidak ditemukan'
         ])->setStatusCode(404);
     }
-
     return $this->response->setJSON($mahasiswa);
 }
     
-
     public function create()
     {
         return $this->store();
     }
-
    public function store()
 {
     $mahasiswaModel = new Mahasiswa();
     $data = $this->request->getJSON(true);
-
     // Daftar program studi yang diperbolehkan
     $allowedProdi = [
         "Teknik Informatika", "Teknik Mesin", "Teknik Elektronika", "Teknik Listrik",
@@ -44,7 +36,6 @@ class MahasiswaController extends BaseController
         "Teknik Rekayasa Mekatronika", "Pengembangan Produk Argoindustri",
         "Teknik Rekayasa Energi Terbarukan"
     ];
-
     // Validasi data input
     if (!$this->validate([
         'npm_mhs'   => 'required|is_unique[mahasiswa.npm_mhs]',
@@ -60,10 +51,8 @@ class MahasiswaController extends BaseController
             'errors' => $this->validator->getErrors()
         ])->setStatusCode(ResponseInterface::HTTP_BAD_REQUEST);
     }
-
     // Simpan data ke database
     $mahasiswaModel->insert($data);
-
     return $this->response->setJSON([
         'status' => 'success',
         'message' => 'Data mahasiswa berhasil ditambahkan'
