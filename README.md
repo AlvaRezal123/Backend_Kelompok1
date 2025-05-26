@@ -8,8 +8,11 @@ https://getcomposer.org/download/
 composer -V
 
 🛠️ 2. Instalasi CodeIgniter 4
+
 Setelah Composer siap, install CodeIgniter 4 dengan perintah:
+
 composer create-project codeigniter4/appstarter nama-proyek
+
 
 ⚙️ 3. Menjalankan Server CodeIgniter
 Jalankan server development CodeIgniter:
@@ -20,8 +23,11 @@ CodeIgniter development server started on http://localhost:8080
 
 🛣️ 4. Tambahkan Route API
 Edit file app/Config/Routes.php:
+
 contoh ;
+
 // Routes untuk Mahasiswa API
+
 $routes->group('mahasiswa', function($routes) {
     $routes->get('/', 'MahasiswaController::index');
     $routes->get('(:segment)', 'MahasiswaController::show/$1');
