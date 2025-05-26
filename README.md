@@ -65,6 +65,12 @@ $routes->group('mahasiswa', function($routes) {
     $routes->delete('delete/(:segment)', 'MahasiswaController::delete/$1');
 });
 ```
+<h2>6. Keenam</h2>
+Langkah Ke enam kita akan menginstall software aplikasi berupa postman yang nantinya berguna untuk Test API endpoints tanpa perlu frontend,
+Cek apakah API kamu bekerja dengan benar dan Debug API response. untuk menginstal aplikasi tersebut bisa melalui link berikut (https://www.postman.com/) 
+
+<h2>7. Ketujuh</h2>
+langkah selanjutnya adalah uji coba menggunakan postman yang telah kita install 
 
 
 
