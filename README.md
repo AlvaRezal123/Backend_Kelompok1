@@ -1,4 +1,4 @@
-SISTEM MANAJEMEN MAGANG
+<H3>SISTEM MANAJEMEN MAGANG</H3>
 
 📦 1. Instalasi Composer
 CodeIgniter 4 membutuhkan Composer untuk mengelola dependensi.
