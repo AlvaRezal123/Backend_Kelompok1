@@ -1,1 +1,1 @@
-<h1> Sistem Manajemen Magang </h1>
+<h1> <strong>Sistem Manajemen Magang </strong</h1>
