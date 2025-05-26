@@ -58,5 +58,6 @@ POST: http://localhost:8080/mahasiswa
 
 PUT: http://localhost:8080/mahasiswa/update/260202039
 
+
 DELETE: http://localhost:8080/mahasiswa/delete/230202039
 
