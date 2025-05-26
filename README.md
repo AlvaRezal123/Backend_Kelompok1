@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/58b4260a-3e4f-4c1d-9e51-f53dbf39e240)<h1><strong> :computer: BackEnd</h1></strong> 
+
 <em><h2>Sistem Manajemen Magang</h2></em>
 	<h2>:raised_hand_with_fingers_splayed:  Hai, Perkenalkan!</h2>  
  Saya Alva, dan di sini saya akan membagikan penjelasan mengenai proses menjadi seorang Backend Developer dalam proyek Sistem Manajemen Magang. Penjelasan ini akan mencakup langkah-langkah mulai dari:
