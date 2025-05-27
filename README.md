@@ -34,6 +34,7 @@ php spark serve
 
 <h2>4. Keempat</h2>
 Langkah Ke Empat ialah membuat sebuah database untuk mencoba mengkoneksikan sistem yang akan dibuat, disini saya menggunakan phpmyadmin jadi langsung buka saja laragon lalu klik start dan klik database, disitu saya membuat sebuah database baru dengan nama sistem_manajemen_magang setelah itu membuat sebuah tabel seperti Mahasiswa, Pembibing, Perusahaan, Magang, serta User juga.
+berikut link drive dari database yang telah saya buat (https://drive.google.com/drive/folders/1rrAyQmJZTMFgn-OT804DNxVQ-vYm8nTC?usp=drive_link)
 
 <h2>5. Kelima</h2>
 Langkah Kelima kalian langsung saja menambahkan serta memodifikasikan framework yang akan kalian jalankan,
@@ -70,7 +71,109 @@ Langkah Ke enam kita akan menginstall software aplikasi berupa postman yang nant
 Cek apakah API kamu bekerja dengan benar dan Debug API response. untuk menginstal aplikasi tersebut bisa melalui link berikut (https://www.postman.com/) 
 
 <h2>7. Ketujuh</h2>
-langkah selanjutnya adalah uji coba menggunakan postman yang telah kita install 
+Sekarang kita akan **melakukan pengujian API** yang telah dibuat di Postman. Misalnya, kamu ingin menguji **endpoint untuk menampilkan seluruh data mahasiswa**, kamu bisa:
+- Buka Postman
+
+- Pilih metode GET
+
+- Masukkan URL endpoint kamu, misalnya:
+```
+http://localhost:8080/mahasiswa
+```
+- Klik Send
+Jika berhasil, maka akan muncul response berupa data mahasiswa dari database.
+```
+[
+  {
+    "id": 1,
+    "nama": "Alva Rezal",
+    "nim": "230202039",
+    "jurusan": "Teknik Informatika"
+  },
+  ...
+]
+```
+<h2>8. Kedelapan</h2> Selain `GET`, kamu juga bisa **menguji metode POST, PUT, dan DELETE**: - `POST`: untuk menambahkan data - `PUT`: untuk mengubah data - `DELETE`: untuk menghapus data
+Contoh testing POST:
+
+- Pilih metode POST
+
+- Masukkan endpoint:
+```
+http://localhost:8080/mahasiswa
+```
+- Pergi ke tab Body → pilih raw → pilih format JSON → masukkan data seperti:
+```
+  {
+    "npm_mhs": "22222222",
+    "nama_mhs": "Muhammad Alva Rezal",
+    "prodi": "Teknik Informatika",
+    "alamat": "Jalan Baruna Tengah X",
+    "no_telp": "08997911040",
+    "email": "ralfa9339@gmail.com"
+}
+```
+- Klik Send dan cek apakah respons sukses atau error
+
+<h2>9. kesembilan</h2> Kita dapat menguji edit juga menggunakan metode 'put' untuk  data yang telah masuk ke database
+Contoh testing PUT :
+- Pilih metode PUT
+
+- Masukkan URL endpoint:
+```
+http://localhost:8080/mahasiswa/update/1
+```
+_(Angka 1 adalah ID mahasiswa yang ingin diedit)_
+- Buka tab Body → pilih raw → pilih JSON
+Lalu masukkan data yang ingin diubah:
+```
+{
+    "npm_mhs": "121212",
+    "nama_mhs": "Muhammad Alva Rezal",
+    "prodi": "Teknik Informatika",
+    "alamat": "Jalan Baruna Tengah X",
+    "no_telp": "08997911040",
+    "email": "ralfa9339@gmail.com"
+
+}
+```
+
+- Klik Send
+
+Jika berhasil, respons yang keluar biasanya:
+```
+            'status' => 'success',
+            'message' => 'Data mahasiswa berhasil diperbarui'
+```
+<h2>10. Kesepuluh</h2> Selanjutnya kita akan mencoba untuk menguji menghapus data menggunakan metode 'delete'
+Contoh testing DELETE :
+- Pilih metode DELETE
+
+- Masukkan URL endpoint:
+```
+http://localhost:8080/mahasiswa/delete/1
+```
+_(Angka 1 adalah ID mahasiswa yang ingin dihapus)_
+- Klik Send
+Jika berhasil, respons biasanya:
+```
+{
+  "status": "success",
+  "message": "Data mahasiswa berhasil dihapus"
+}
+```
+
+<h2>11. Kesebelas</h2> TIPS Debugging
+
+
+Jika muncul error **404 Not Found**, periksa kembali route-nya. - Jika muncul error **500 Internal Server Error**, cek kembali isi controller atau model, mungkin ada kesalahan penulisan field. - Pastikan kamu **sudah menjalankan server** dengan `php spark serve`.
+
+
+
+
+
+
+
 
 
 
