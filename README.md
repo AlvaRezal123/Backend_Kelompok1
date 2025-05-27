@@ -71,7 +71,7 @@ Langkah Ke enam kita akan menginstall software aplikasi berupa postman yang nant
 Cek apakah API kamu bekerja dengan benar dan Debug API response. untuk menginstal aplikasi tersebut bisa melalui link berikut (https://www.postman.com/) 
 
 <h2>7. Ketujuh</h2>
-Sekarang kita akan **melakukan pengujian API** yang telah dibuat di Postman. Misalnya, kamu ingin menguji **endpoint untuk menampilkan seluruh data mahasiswa**, kamu bisa:
+Sekarang kita akan melakukan pengujian API yang telah dibuat di Postman. Misalnya, kamu ingin menguji endpoint untuk menampilkan seluruh data mahasiswa, kamu bisa:
 - Buka Postman
 
 - Pilih metode GET
@@ -93,7 +93,7 @@ Jika berhasil, maka akan muncul response berupa data mahasiswa dari database.
   ...
 ]
 ```
-<h2>8. Kedelapan</h2> Selain `GET`, kamu juga bisa **menguji metode POST, PUT, dan DELETE**: - `POST`: untuk menambahkan data - `PUT`: untuk mengubah data - `DELETE`: untuk menghapus data
+<h2>8. Kedelapan</h2> Selain `GET`, kita juga bisa menguji metode POST, PUT, dan DELETE: - `POST`: untuk menambahkan data - `PUT`: untuk mengubah data - `DELETE`: untuk menghapus data
 Contoh testing POST:
 
 - Pilih metode POST
